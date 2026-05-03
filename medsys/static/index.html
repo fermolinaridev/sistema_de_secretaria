@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MedSys Local — Clínica Bem-Estar</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topo">
+    <div class="topo__marca">
+      <div class="logo" aria-hidden="true">+</div>
+      <div>
+        <h1>MedSys Local</h1>
+        <p>Cadastro de pacientes • banco local SQLite • offline</p>
+      </div>
+    </div>
+    <div class="topo__indicador" id="indicador">
+      <span class="ponto"></span>
+      <span id="indicador-texto">Conectado ao banco local</span>
+    </div>
+  </header>
+
+  <main class="grade">
+    <section class="cartao formulario" aria-labelledby="titulo-form">
+      <h2 id="titulo-form">Cadastro do paciente</h2>
+      <form id="form" novalidate>
+        <input type="hidden" id="id" />
+
+        <fieldset>
+          <legend>Dados pessoais</legend>
+          <label>Nome completo<span class="obrig">*</span>
+            <input id="nome" type="text" autocomplete="off" required />
+          </label>
+          <div class="linha">
+            <label>Data de nascimento<span class="obrig">*</span>
+              <input id="data_nascimento" type="text" placeholder="dd/mm/aaaa" inputmode="numeric" required />
+            </label>
+            <label>Telefone<span class="obrig">*</span>
+              <input id="telefone" type="text" placeholder="(11) 91234-5678" required />
+            </label>
+          </div>
+          <label>CPF<span class="obrig">*</span>
+            <input id="cpf" type="text" placeholder="000.000.000-00" inputmode="numeric" required />
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Convênio</legend>
+          <label>Operadora
+            <input id="operadora" type="text" placeholder="Unimed, Bradesco Saúde…" />
+          </label>
+          <div class="linha">
+            <label>Carteirinha
+              <input id="carteirinha" type="text" />
+            </label>
+            <label>Validade
+              <input id="validade_carteirinha" type="text" placeholder="dd/mm/aaaa" inputmode="numeric" />
+            </label>
+          </div>
+        </fieldset>
+
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+
+        <div class="acoes">
+          <button type="submit" class="btn btn--primario" id="btn-salvar">Salvar</button>
+          <button type="button" class="btn" id="btn-limpar">Limpar</button>
+          <button type="button" class="btn btn--perigo" id="btn-excluir" hidden>Excluir</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="cartao lista" aria-labelledby="titulo-lista">
+      <div class="lista__topo">
+        <h2 id="titulo-lista">Pacientes cadastrados</h2>
+        <input id="busca" type="search" placeholder="Buscar por nome ou CPF…" autocomplete="off" />
+      </div>
+
+      <div class="legenda">
+        <span class="badge badge--vencido">Vencido</span>
+        <span class="badge badge--avencer">Vence em ≤ 30 dias</span>
+        <span class="badge badge--ok">Em dia</span>
+      </div>
+
+      <div class="tabela-wrap">
+        <table class="tabela" id="tabela">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>CPF</th>
+              <th>Telefone</th>
+              <th>Convênio</th>
+              <th>Carteirinha</th>
+              <th>Validade</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+            <tr><td colspan="6" class="vazio">Carregando…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
